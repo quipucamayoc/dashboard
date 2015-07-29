@@ -1,16 +1,28 @@
 (ns dashboard.network
   (:require [cljs.nodejs :as nodejs]
-            [cljs.reader :as edn]
-            [cljs.core.async :as a :refer [<!]])
-  (:require-macros [cljs.core.async.macros :refer [go-loop]]))
+            [cljs.reader :as reader]
+            [cljs.core.async
+             :as a
+             :refer [>! <! chan buffer close! alts! timeout]])
+  (:require-macros [cljs.core.async.macros :refer [go go-loop]]))
 
 (enable-console-print!)
 
+(defonce input-chan (chan))
+
 (defonce fs (nodejs/require "fs"))
 
-(defonce port-config (.readFile fs "port-record/mpr.edn" "utf8"
-                                (fn [err data]
-                                  (println (edn/read-string data)))))
+(defn read-config []
+  (.readFile fs "port-record/current/mpr.edn"
+             "utf8"
+             (fn [err data]
+               (go (>! input-chan data)))))
+
+(defn assess-communication-targets [edn]
+  (let [processes (reader/read-string edn)]
+    (println processes)))
 
 (defn init []
+  (read-config)
+  (go (assess-communication-targets (<! input-chan)))
   #_(.log js/console port-config))

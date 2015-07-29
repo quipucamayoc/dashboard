@@ -1,0 +1,15 @@
+{:debug             {:listen   41100
+                     :address  :128.0.0.1
+                     :wants ["raw-sensor" "api-commands"]}
+ :device-server     {:listen   41101
+                     :address  :128.0.0.1
+                     :wants ["servicing"]}
+ :processing-bean   {:listen   41102
+                     :address  :128.0.0.1
+                     :wants ["raw-sensor"]}
+ :command-generator {:listen   41103
+                     :address  :128.0.0.1
+                     :wants ["raw-sensor" "servicing"]}
+ :sound             {:listen   41104
+                     :address  :128.0.0.1
+                     :wants ["api-commands" "servicing"]}}
