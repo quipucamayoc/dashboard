@@ -3,7 +3,7 @@
 
   Uses the blessed and blessed-contrib libraries for node."
   (:require [cljs.nodejs :as nodejs]
-            ;[galileo.comm :as comm :refer [pass->]]
+            [dashboard.comm :as comm]
             [cljs.core.async :as a :refer [<!]]
             [goog.object :as o])
   (:require-macros [cljs.core.async.macros :refer [go-loop]]))
@@ -173,10 +173,12 @@
 
 (defn main []
   ;(create-layout)
-  (start-prog-log)
-  (start-osc-log)
-  (init-data)
-  (exit-handler ["escape" "q" "C-c"])
-  (.render screen))
+  ;(start-prog-log)
+  ;(start-osc-log)
+  ;(init-data)
+  ;(exit-handler ["escape" "q" "C-c"])
+  ;(.render screen)
+  (comm/init)
+  )
 
 (set! *main-cli-fn* main)
