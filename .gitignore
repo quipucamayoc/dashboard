@@ -9,8 +9,10 @@ pom.xml
 .lein-plugins/
 sftp-config.json
 doc
-node_modules
+/node_modules
 run
 *.iml
 .idea
 .swp
+package.json
+*.log
