@@ -1,4 +1,4 @@
-(defproject dashboard "0.5.0"
+(defproject com.quipucamayoc/dashboard "0.5.0"
             :description "A viewer into the Quipu OSC universe"
             :url "http://quipucamayoc.com/"
             :license {:name "Eclipse Public License"

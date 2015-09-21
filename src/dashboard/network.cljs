@@ -16,13 +16,15 @@
   (.readFile fs "port-record/current/mpr.edn"
              "utf8"
              (fn [err data]
-               (go (>! input-chan data)))))
+               (go
+                 (>! input-chan data)))))
 
 (defn assess-communication-targets [edn]
   (let [processes (reader/read-string edn)]
     (println processes)))
 
 (defn init []
-  (read-config)
-  (go (assess-communication-targets (<! input-chan)))
-  #_(.log js/console port-config))
+  (go
+    (read-config)
+    (assess-communication-targets (<! input-chan))
+    (close! input-chan)))
